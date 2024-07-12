@@ -15,10 +15,9 @@ static void free_nodes(struct node *root)
     free(root);
 }
 
-struct linked_list new_linked_list(void)
+inline struct linked_list new_linked_list(void)
 {
-    struct linked_list new = { 0 };
-    return new;
+    return (struct linked_list) { 0 };
 }
 
 void free_linked_list(struct linked_list list[static 1])
@@ -29,9 +28,7 @@ void free_linked_list(struct linked_list list[static 1])
 void clear_linked_list(struct linked_list list[static 1])
 {
     free_linked_list(list);
-    list->first = NULL;
-    list->last = NULL;
-    list->len = 0;
+    *list = new_linked_list();
 }
 
 bool push_linked_list(struct linked_list list[static 1], long value)
@@ -72,6 +69,7 @@ long *index_in_linked_list(struct linked_list list[static 1], unsigned int index
 {
     struct node *current = list->first;
     if (!current) return NULL;
+
         while (index--) {
             if (!current->next) return NULL;
             current = current->next;
@@ -83,6 +81,7 @@ long *find_in_linked_list(struct linked_list list[static 1], long value)
 {
     struct node *current = list->first;
     if (!current) return NULL;
+
     while (current->value != value) {
         if (!current->next) return NULL;
         current = current->next;
