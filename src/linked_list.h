@@ -1,6 +1,8 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
+#include <stdbool.h>
+
 /*
  * A singly-linked list.
  * The current implementation seperately allocates each node.
@@ -23,9 +25,9 @@ struct linked_list new_linked_list(void);
  *
  *  This is a constant-time operation.
  */ 
-void push_linked_list(struct linked_list list[static 1], long value);
+bool push_linked_list(struct linked_list list[static 1], long value);
 
-void push_front_linked_list(struct linked_list list[static 1], long value);
+bool push_front_linked_list(struct linked_list list[static 1], long value);
 
 /*
  * Frees all of the elements in `list`.

@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "linked_list.h"
+#include <stdbool.h>
 
 struct node {
     long value;
@@ -33,31 +34,38 @@ void clear_linked_list(struct linked_list list[static 1])
     list->len = 0;
 }
 
-void push_linked_list(struct linked_list list[static 1], long value)
+bool push_linked_list(struct linked_list list[static 1], long value)
 {
     if (list->last) {
         // list->last->next is always NULL
         list->last->next = malloc(sizeof(struct node));
+        if (list->last->next == NULL) return false; 
+
         list->last->next->value = value;
         list->last = list->last->next;
     } else {
-        // if `last` is empty, so is `first`
+        // if `last` is NULL, so is `first`
         list->first = malloc(sizeof(struct node));
+        if (list->first == NULL) return false; 
+
         list->first->next = NULL;
         list->first->value = value;
         list->last = list->first;
     }
     list->len++;
+    return true;
 }
 
-void push_front_linked_list(struct linked_list list[static 1], long value)
+bool push_front_linked_list(struct linked_list list[static 1], long value)
 {
     struct node *new = malloc(sizeof(struct node));
+    if (new == NULL) return false;
     new->value = value;
     new->next = list->first;
     list->first = new;
 
     list->len++;
+    return true;
 }
 
 long *index_in_linked_list(struct linked_list list[static 1], unsigned int index)
