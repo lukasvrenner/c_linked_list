@@ -1,7 +1,7 @@
 #include <stdlib.h>
-#include <stdint.h>
 #include <stdbool.h>
 #include "linked_list.h"
+
 struct node {
     long value;
     struct node *next;
