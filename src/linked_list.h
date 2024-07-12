@@ -1,6 +1,8 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
+#include <stdbool.h>
+
 /*
  * A heap-allocated singly-linked list.
  * The current implementation seperately allocates each node.
@@ -21,9 +23,13 @@ struct linked_list new_linked_list(void);
  *  param *list: the list to push to
  *  param value: the value to push on the list
  *
+ *  returns: `true` if operation succeeded, `false` otherwise
+ *
  *  This is a constant-time operation.
  */ 
-int push_linked_list(struct linked_list *list, long value);
+bool push_linked_list(struct linked_list *list, long value);
+
+bool push_front_linked_list(struct linked_list *list, long value);
 
 /*
  * Frees all of the elements in the list.
@@ -43,9 +49,11 @@ void free_linked_list(struct linked_list *list);
  */
 void clear_linked_list(struct linked_list *list);
 
-long *index_in_linked_list(struct linked_list *list, unsigned long index);
+long *index_in_linked_list(struct linked_list *list, unsigned int index);
 
 long *find_in_linked_list(struct linked_list *list, long value);
+
+
 
 
 #endif

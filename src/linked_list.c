@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include "linked_list.h"
 struct node {
     long value;
@@ -35,27 +36,42 @@ void clear_linked_list(struct linked_list *list)
     list->len = 0;
 }
 
-int push_linked_list(struct linked_list *list, long value)
+bool push_linked_list(struct linked_list *list, long value)
 {
-    if (!list) return -1;
+    if (!list) return false;
     if (list->last) {
         // list->last->next is always NULL
         list->last->next = malloc(sizeof(struct node));
         list->last->next->value = value;
         list->last = list->last->next;
     } else {
+        // if `last` is empty, so is `first`
         list->first = malloc(sizeof(struct node));
         list->first->next = NULL;
         list->first->value = value;
         list->last = list->first;
     }
     list->len++;
-    return 0;
+    return true;
 }
 
-long *index_in_linked_list(struct linked_list *list, unsigned long index)
+bool push_front_linked_list(struct linked_list *list, long value)
+{
+    if (!list) return false;
+
+    struct node *new = malloc(sizeof(struct node));
+    new->value = value;
+    new->next = list->first;
+    list->first = new;
+
+    list->len++;
+    return true;
+}
+
+long *index_in_linked_list(struct linked_list *list, unsigned int index)
 {
     struct node *current = list->first;
+    if (!current) return NULL;
         while (index--) {
             if (!current->next) return NULL;
             current = current->next;
@@ -66,6 +82,7 @@ long *index_in_linked_list(struct linked_list *list, unsigned long index)
 long *find_in_linked_list(struct linked_list *list, long value)
 {
     struct node *current = list->first;
+    if (!current) return NULL;
     while (current->value != value) {
         if (!current->next) return NULL;
         current = current->next;
