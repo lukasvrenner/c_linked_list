@@ -4,7 +4,6 @@
 struct node {
     long value;
     struct node *next;
-    struct node *prev;
 };
 
 static void free_nodes(struct node *root);
@@ -42,13 +41,11 @@ int push_linked_list(struct linked_list *list, long value)
     if (list->last) {
         // list->last->next is always NULL
         list->last->next = malloc(sizeof(struct node));
-        list->last->next->prev = list->last;
         list->last->next->value = value;
         list->last = list->last->next;
     } else {
         list->first = malloc(sizeof(struct node));
         list->first->next = NULL;
-        list->first->prev = NULL;
         list->first->value = value;
         list->last = list->first;
     }
@@ -58,22 +55,11 @@ int push_linked_list(struct linked_list *list, long value)
 
 long *index_in_linked_list(struct linked_list *list, unsigned long index)
 {
-    struct node *current;
-    if (index <= list->len / 2) {
-        current = list->first;
-
+    struct node *current = list->first;
         while (index--) {
             if (!current->next) return NULL;
             current = current->next;
         }
-    } else {
-        current = list->last;
-
-        while (index--) {
-            if (!current->prev) return NULL;
-            current = current->next;
-        }
-    }
     return &current->value;
 }
 

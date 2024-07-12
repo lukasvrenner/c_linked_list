@@ -2,7 +2,7 @@
 #define LINKED_LIST_H
 
 /*
- * A heap-allocated doubly-linked list.
+ * A heap-allocated singly-linked list.
  * The current implementation seperately allocates each node.
  * Before this structure is dropped, its destructor, 
  * `free_linked_list()`, must be called.
