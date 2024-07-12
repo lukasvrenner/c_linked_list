@@ -1,5 +1,5 @@
-#ifndef MAIN
-#define MAIN
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
 
 /*
  * A heap-allocated doubly-linked list.
@@ -42,6 +42,10 @@ void free_linked_list(struct linked_list *list);
  * Behaves just like `free_linked_list()`, but it additionally resets the length.
  */
 void clear_linked_list(struct linked_list *list);
+
+long *index_in_linked_list(struct linked_list *list, unsigned long index);
+
+long *find_in_linked_list(struct linked_list *list, long value);
 
 
 #endif
