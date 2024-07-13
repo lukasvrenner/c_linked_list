@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <assert.h>
 #include "linked_list.h"
 int main(void)
