@@ -6,7 +6,7 @@
 /*
  * A singly-linked list.
  * The current implementation seperately allocates each node.
- * Before this structure is dropped, its destructor, 
+ * Before this structure is dropped, its destructor,
  * `free_linked_list()`, must be called.
  */
 struct linked_list {
@@ -24,7 +24,7 @@ struct linked_list new_linked_list(void);
  *  param value: the value to push on the list
  *
  *  This is a constant-time operation.
- */ 
+ */
 bool push_linked_list(struct linked_list list[static 1], long value);
 
 bool push_front_linked_list(struct linked_list list[static 1], long value);
@@ -43,7 +43,8 @@ void free_linked_list(struct linked_list list[static 1]);
  */
 void clear_linked_list(struct linked_list list[static 1]);
 
-long *index_in_linked_list(struct linked_list list[static 1], unsigned int index);
+long *index_in_linked_list(struct linked_list list[static 1],
+                           unsigned int index);
 
 long *find_in_linked_list(struct linked_list list[static 1], long value);
 

@@ -1,5 +1,6 @@
-#include <assert.h>
 #include "linked_list.h"
+#include <assert.h>
+
 int main(void)
 {
     struct linked_list my_list = new_linked_list();

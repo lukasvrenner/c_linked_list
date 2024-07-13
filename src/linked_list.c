@@ -1,6 +1,6 @@
-#include <stdlib.h>
 #include "linked_list.h"
 #include <stdbool.h>
+#include <stdlib.h>
 
 struct node {
     long value;
@@ -11,7 +11,8 @@ static void free_nodes(struct node *root);
 
 static void free_nodes(struct node *root)
 {
-    if (root && root->next) free_nodes(root->next);
+    if (root && root->next)
+        free_nodes(root->next);
     free(root);
 }
 
@@ -36,14 +37,16 @@ bool push_linked_list(struct linked_list list[static 1], long value)
     if (list->last) {
         // list->last->next is always NULL
         list->last->next = malloc(sizeof(struct node));
-        if (list->last->next == NULL) return false; 
+        if (list->last->next == NULL)
+            return false;
 
         list->last->next->value = value;
         list->last = list->last->next;
     } else {
         // if `last` is NULL, so is `first`
         list->first = malloc(sizeof(struct node));
-        if (list->first == NULL) return false; 
+        if (list->first == NULL)
+            return false;
 
         list->first->next = NULL;
         list->first->value = value;
@@ -56,7 +59,8 @@ bool push_linked_list(struct linked_list list[static 1], long value)
 bool push_front_linked_list(struct linked_list list[static 1], long value)
 {
     struct node *new = malloc(sizeof(struct node));
-    if (new == NULL) return false;
+    if (new == NULL)
+        return false;
     new->value = value;
     new->next = list->first;
     list->first = new;
@@ -65,27 +69,31 @@ bool push_front_linked_list(struct linked_list list[static 1], long value)
     return true;
 }
 
-long *index_in_linked_list(struct linked_list list[static 1], unsigned int index)
+long *index_in_linked_list(struct linked_list list[static 1],
+                           unsigned int index)
 {
     struct node *current = list->first;
-    if (!current) return NULL;
+    if (!current)
+        return NULL;
 
-        while (index--) {
-            if (!current->next) return NULL;
-            current = current->next;
-        }
+    while (index--) {
+        if (!current->next)
+            return NULL;
+        current = current->next;
+    }
     return &current->value;
 }
 
 long *find_in_linked_list(struct linked_list list[static 1], long value)
 {
     struct node *current = list->first;
-    if (!current) return NULL;
+    if (!current)
+        return NULL;
 
     while (current->value != value) {
-        if (!current->next) return NULL;
+        if (!current->next)
+            return NULL;
         current = current->next;
     }
     return &current->value;
 }
-
